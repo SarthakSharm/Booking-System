@@ -40,11 +40,11 @@ def signup():
         return render_template("signup.html", user=current_user)
     if request.method == "POST":
         new_user = User(
-            name=request.form.get("Name"),
-            email=request.form.get("Email"),
-            dob=datetime.strptime(request.form.get("Dob"), "%Y-%m-%d"),
-            phone=request.form.get("Phone"),
-            password=generate_password_hash(request.form.get("Password")),
+            name=request.form.get("name"),
+            email=request.form.get("email"),
+            dob=datetime.strptime(request.form.get("dob"), "%Y-%m-%d"),
+            phone=request.form.get("phone"),
+            password=generate_password_hash(request.form.get("password")),
         )
         db.session.add(new_user)
         db.session.commit()
