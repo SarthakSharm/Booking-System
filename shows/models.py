@@ -8,3 +8,4 @@ class Show(db.Model):
     ticket_price = db.Column(db.Integer, nullable=False)
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'), nullable=False)
     date = db.Column(db.Date, nullable=False)
+    ticket = db.relationship("Ticket")

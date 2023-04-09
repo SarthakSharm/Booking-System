@@ -10,3 +10,4 @@ class User(db.Model, UserMixin):
     phone = db.Column(db.Integer, nullable=False)
     password = db.Column(db.String, nullable=True)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
+    ticket = db.relationship("Ticket")
