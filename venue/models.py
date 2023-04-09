@@ -7,4 +7,4 @@ class Venue(db.Model):
     place = db.Column(db.String, nullable=True)
     capacity = db.Column(db.Integer, nullable=True)
     screens = db.Column(db.Integer, nullable=False)
-    show = db.relationship("Show", backref="show_venue")
+    show = db.relationship("Show", cascade="all, delete", backref="show_venue")
