@@ -14,9 +14,18 @@ def create_app():
 
     from .views import views
     from accounts.auth import auth
+    from shows.views import show
+    from venue.views import venue
+
 
     app.register_blueprint(views)
     app.register_blueprint(auth)
+    
+    app.register_blueprint(venue)
+    app.register_blueprint(show)
+    
+
+
 
     from accounts.models import User
     with app.app_context():
