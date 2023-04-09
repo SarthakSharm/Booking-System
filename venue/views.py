@@ -19,8 +19,8 @@ def venues():
 def create():
     if current_user.is_admin == False:
         flash("You are not admin", category="error")
-        return redirect(url_for('venue.venues'))
-    
+        return redirect(url_for("venue.venues"))
+
     if request.method == "POST":
         if current_user.is_admin == True:
             venue = Venue(
@@ -31,7 +31,23 @@ def create():
             )
             db.session.add(venue)
             db.session.commit()
-            return redirect(url_for('venue.venues'))
-       
+            return redirect(url_for("venue.venues"))
+
     if request.method == "GET":
         return render_template("createVenue.html", user=current_user)
+
+
+@venue.route("/delete/<int:venue_id>", methods=["GET"])
+def delete(venue_id):
+    if current_user.is_admin == False:
+        flash("You are not admin", category="error")
+        return redirect(url_for("venue.venues"))
+
+    if request.method == "GET":
+        venue = Venue.query.filter_by(id=venue_id).first()
+        if venue == None:
+            flash("Empty", category="error")
+            return redirect(url_for("venue.venues"))
+        db.session.delete(venue)
+        db.session.commit()
+        return redirect(url_for("venue.venues"))
