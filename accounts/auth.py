@@ -1,5 +1,5 @@
 from flask import Blueprint, request, render_template
-from accounts.models import User
+from .models import User
 from datetime import datetime
 from website import db
 
@@ -22,12 +22,13 @@ def signup():
         # Handle GET request
         return render_template("signup.html")
     if request.method == "POST":
+
         new_user = User(
-            name=request.form["Name"],
-            email=request.form["Email"],
-            dob=datetime.strptime(request.form["Dob"], "%Y-%m-%d"),
-            phone=request.form["Phone"],
-            password=request.form["Password"],
+            name = request.form.get('Name'),
+            email = request.form.get('Email'),
+            dob = datetime.strptime(request.form.get("Dob"), "%Y-%m-%d"),
+            phone = request.form.get('Phone'),
+            password = request.form.get('Password'),
         )
         db.session.add(new_user)
         db.session.commit()

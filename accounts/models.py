@@ -1,5 +1,3 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from website import db, app
 
 class User(db.Model):
@@ -10,6 +8,3 @@ class User(db.Model):
     phone = db.Column(db.Integer, nullable=False)
     password = db.Column(db.String, nullable=True)
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
-
-with app.app_context():
-    db.create_all()
