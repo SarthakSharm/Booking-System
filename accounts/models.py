@@ -1,6 +1,8 @@
-from website import db, app
+from flask_login import UserMixin
+from website import db
 
-class User(db.Model):
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, unique=True, nullable=False)
     name = db.Column(db.String, nullable=False)

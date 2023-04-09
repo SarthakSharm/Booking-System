@@ -1,31 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SignUp</title>
-</head>
-<body>
-  <form id="signup-form" method="POST" action="/auth/signup">
-    <div id="alert"></div>
-    
-    <label for="email">Email address</label>
-    <input name="Email" type="email" id="email">
-    
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %}
+{% block content %}
+<form method="POST">
+  <h3 align="center">Sign Up</h3>
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />
+  </div>
+  <div class="form-group">
     <label for="name">Name</label>
-    <input name="Name" type="text" id="name">
-    
+    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" />
+  </div>
+  <div class="form-group">
     <label for="password">Password</label>
-    <input name="Password" type="password" id="password">
-    
-    <label for="dob">DOB</label>
-    <input name="Dob" type="date" id="dob">
-
-    <label for="phone">Phone</label>
-    <input name="Phone" type="number" id="phone">
-    
-    <button type="submit">Sign up</button>
-  </form>
-</body>
-</html>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" />
+  </div>
+  <div class="form-group">
+    <label for="dob">Password (Confirm)</label>
+    <input type="date" class="form-control" id="dob" name="dob" placeholder="DOB" />
+  </div>
+  <div class="form-group">
+    <label for="phone">Password (Confirm)</label>
+    <input type="date" class="form-control" id="phone" name="phone" placeholder="Enter Phone" />
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
