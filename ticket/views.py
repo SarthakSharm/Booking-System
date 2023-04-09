@@ -14,6 +14,7 @@ ticket = Blueprint("ticket", __name__, url_prefix="/ticket")
 def myTickets():
     if request.method == "GET":
         tickets = Ticket.query.filter_by(user=current_user.id)
+        # tickets = Ticket.query.filter(Venue.show.any())
         return render_template("myTickets.html", tickets=tickets, user=current_user)
 
 

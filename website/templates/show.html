@@ -1,6 +1,10 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %}
 {% block content%}
+
+
 <div class="container mt-4">
+    <a href="http://localhost:5000/show/create" class="btn btn-primary bton-outline-primary mb-4 mt-4">Add Show</a>
+
     <div class="row">
         {% for show in shows %}
         <div class="col-4">
@@ -12,6 +16,10 @@
                     <p class="card-text">Price : {{show.ticket_price}}</p>
                     <p class="card-text">Venue : {{show.show_venue.name}}</p>
                     <p class="card-text">Date : {{show.date}}</p>
+                    <span>
+                        <a href="/show/delete/{{show.id}}" class="btn btn-danger">Delete</a>
+                        <!-- <a href="#" class="btn btn-warning">Edit</a> -->
+                    </span>
                 </div>
             </div>
         </div>

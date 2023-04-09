@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Sign Up{% endblock %}
 {% block content %}
 <form method="POST">
-    <h3 align="center">Add Show</h3>
+    <h3 align="center" class="mt-4">Add Show</h3>
     <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" />
@@ -31,6 +31,6 @@
         </select>
     </div>
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary mb-4">Submit</button>
 </form>
 {% endblock %}

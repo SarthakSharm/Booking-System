@@ -2,6 +2,7 @@ from website import db, app
 
 
 class Show(db.Model):
+    __tablename__ = "show"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     rating = db.Column(db.Integer, nullable=True)
@@ -9,4 +10,8 @@ class Show(db.Model):
     ticket_price = db.Column(db.Integer, nullable=False)
     venue_id = db.Column(db.Integer, db.ForeignKey("venue.id"), nullable=False)
     date = db.Column(db.Date, nullable=False)
-    ticket = db.relationship("Ticket", backref="ticket_show")
+    ticket = db.relationship(
+        "Ticket",
+        cascade="all, delete",
+        backref="ticket_show",
+    )

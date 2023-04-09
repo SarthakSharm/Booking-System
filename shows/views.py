@@ -15,42 +15,40 @@ def shows():
         return render_template("show.html", shows=shows, user=current_user)
 
 
-@show.route("/delete/<int:show_id>", methods=["GET", "POST"])
+@show.route("/delete/<int:show_id>", methods=["GET"])
 def delete(show_id):
     if current_user.is_admin == False:
         flash("You are not admin", category="error")
         return redirect(url_for("show.shows"))
-    
-    if request.method == "POST":
-        if current_user.is_admin == True:
-            show = Show.query.filter_by(id = show_id).first()
-            if show == None:
-                flash("Empty", category="error")
-                return redirect(url_for("show.shows"))    
-            show.delete()
-            db.session.commit()
-            return redirect(url_for("show.shows"))
 
-    
+    if request.method == "GET":
+        show = Show.query.filter_by(id=show_id).first()
+        if show == None:
+            flash("Empty", category="error")
+            return redirect(url_for("show.shows"))
+        db.session.delete(show)
+        db.session.commit()
+        return redirect(url_for("show.shows"))
+
 
 @show.route("/create", methods=["GET", "POST"])
 def create():
     if current_user.is_admin == False:
         flash("You are not admin", category="error")
         return redirect(url_for("show.shows"))
-    
-    if request.method == "POST":        
-            show = Show(
-                name=request.form.get("name"),
-                tag=request.form.get("tag"),
-                rating=request.form.get("rating"),
-                ticket_price=request.form.get("price"),
-                venue_id=request.form.get("venue"),
-                date=datetime.strptime(request.form.get("date"), "%Y-%m-%d"),
-            )
-            db.session.add(show)
-            db.session.commit()
-            return redirect(url_for("show.shows"))
+
+    if request.method == "POST":
+        show = Show(
+            name=request.form.get("name"),
+            tag=request.form.get("tag"),
+            rating=request.form.get("rating"),
+            ticket_price=request.form.get("price"),
+            venue_id=request.form.get("venue"),
+            date=datetime.strptime(request.form.get("date"), "%Y-%m-%d"),
+        )
+        db.session.add(show)
+        db.session.commit()
+        return redirect(url_for("show.shows"))
 
     if request.method == "GET":
         venues = Venue.query.all()
