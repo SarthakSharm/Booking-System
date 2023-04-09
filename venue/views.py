@@ -1,8 +1,9 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, redirect, url_for
 from .models import Venue
 from flask_login import login_user, login_required, logout_user, current_user
 from datetime import datetime
 from website import db
+
 
 venue = Blueprint("venue", __name__, url_prefix="/venue")
 
@@ -25,6 +26,6 @@ def create():
         )
         db.session.add(venue)
         db.session.commit()
-        return render_template("venue.html", user=current_user)
+        return redirect(url_for('venue.venues'))
     if request.method == "GET":
         return render_template("createVenue.html", user=current_user)

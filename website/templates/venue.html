@@ -2,13 +2,16 @@
 %}
 
 {% for venue in venues %}
-<ul>
-    <li>{{venue.id}}</li>
-    <li>{{venue.name}}</li>
-    <li>{{venue.place}}</li>
-    <li>{{venue.capacity}}</li>
-    <li>{{venue.screens}}</li>
-</ul>
+<div class="card" style="width: 18rem;">
+    
+    <div class="card-body">
+      <h5 class="card-title">{{venue.name}}</h5>
+      <p class="card-text">Location : {{venue.place}}</p>
+      <p class="card-text">Capacity : {{venue.capacity}}</p>
+      <p class="card-text">No. of Screens : {{venue.screens}}</p>
+    </div>
+  </div>
+
 {% endfor %}
 
 {% endblock %}
