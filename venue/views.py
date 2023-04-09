@@ -7,7 +7,14 @@ from website import db
 venue = Blueprint("venue", __name__, url_prefix="/venue")
 
 
-@venue.route("/", methods=["GET", "POST"])
+@venue.route("/", methods=["GET"])
+def venues():
+    if request.method == "GET":
+        venues = Venue.query.all()
+        return render_template("venue.html", venues=venues, user=current_user)
+
+
+@venue.route("/create", methods=["GET", "POST"])
 def create():
     if request.method == "POST":
         venue = Venue(

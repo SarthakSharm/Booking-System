@@ -1,4 +1,14 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
 %}
-Venues
+
+{% for venue in venues %}
+<ul>
+    <li>{{venue.id}}</li>
+    <li>{{venue.name}}</li>
+    <li>{{venue.place}}</li>
+    <li>{{venue.capacity}}</li>
+    <li>{{venue.screens}}</li>
+</ul>
+{% endfor %}
+
 {% endblock %}
