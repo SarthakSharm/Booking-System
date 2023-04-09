@@ -30,12 +30,15 @@
                 <li class="nav-item">
                     <a class="nav-link" id="logout" href="http://localhost:5000/auth/logout">Logout</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="myTickets" href="/ticket/myTickets">My Tickets</a>
+                </li>
                 {% if current_user.is_admin %}
                 <li class="nav-item">
-                    <a class="nav-link" id="logout" href="http://localhost:5000/venue">Venue</a>
+                    <a class="nav-link" id="venue" href="http://localhost:5000/venue">Venue</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="logout" href="http://localhost:5000/show">Show</a>
+                    <a class="nav-link" id="show" href="http://localhost:5000/show">Show</a>
                 </li>
                 {% endif %}
                 {% else %}
@@ -44,6 +47,10 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-item nav-link" id="signUp" href="http://localhost:5000/auth/signup">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-item nav-link" id="login" href="http://localhost:5000/auth/admin/login">Admin
+                        Login</a>
                 </li>
                 {% endif %}
             </ul>
@@ -57,7 +64,7 @@
             {% if user.is_authenticated %}
             <span class="ml-2 material-icons">
                 perm_identity
-            </span>{{current_user.name|title}}
+            </span><span>{{current_user.name|title}}</span>
             {% endif %}
         </div>
     </nav>

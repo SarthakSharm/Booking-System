@@ -2,7 +2,11 @@
 %}
 <form method="POST" class="card mt-4">
     <div class="card-body">
+        {% if admin %}
+        <h3 align="center">Admin Login</h3>
+        {% else %}
         <h3 align="center">Login</h3>
+        {% endif %}
         <div class="form-group">
             <label for="email">Email Address</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" />

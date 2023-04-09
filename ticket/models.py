@@ -1,4 +1,4 @@
-from website import db, app
+from website import db
 
 
 class Ticket(db.Model):
@@ -8,3 +8,4 @@ class Ticket(db.Model):
     show = db.Column(
         db.Integer, db.ForeignKey("show.id", ondelete="CASCADE"), nullable=False
     )
+    quantity = db.Column(db.Integer, nullable=False, default=1)

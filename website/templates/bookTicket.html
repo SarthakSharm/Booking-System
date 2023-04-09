@@ -8,9 +8,26 @@
                 <h5 class="card-title">{{show.name}}</h5>
                 <p class="card-text">Rating : {{show.rating}}</p>
                 <p class="card-text">Tags : {{show.tag}}</p>
-                <p class="card-text">Price : {{show.ticket_price}}</p>
+                <p class="card-text">Original Price : {{show.ticket_price}}</p>
+                {% if price %}
+                <p class="card-text">Updated Price : {{price}}</p>
+                {% endif %}
                 <p class="card-text">Date : {{show.date}}</p>
                 <input type="date" name="date" id="date" value={{show.date}} hidden>
+                <label for="quantity">Quantity</label>
+                <select name="quantity" class="form-control-sm" id="quantity">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                    <option value=7>7</option>
+                    <option value=8>8</option>
+                    <option value=9>9</option>
+                    <option value=10>10</option>
+                </select>
+                <br>
                 <button type="submit" class="mt-2 btn btn-primary">Confirm Ticket</a>
             </form>
         </div>

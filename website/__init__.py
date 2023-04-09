@@ -22,11 +22,11 @@ def create_app():
     from ticket.views import ticket
 
     app.register_blueprint(views)
-    app.register_blueprint(auth)    
+    app.register_blueprint(auth)
     app.register_blueprint(venue)
     app.register_blueprint(show)
     app.register_blueprint(ticket)
-    
+
     from accounts.models import User
 
     with app.app_context():

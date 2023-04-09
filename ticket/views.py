@@ -23,23 +23,42 @@ def myTickets():
 def confirmTicket(show_id):
     if request.method == "GET":
         show = Show.query.filter_by(id=show_id).first()
-        print(show)
-        return render_template("bookTicket.html", show=show, user=current_user)
+        venue = Venue.query.filter(Venue.show.any(id=show_id)).first()
+        tickets = Ticket.query.filter_by(show=request.form.get("show_id"))
+        count = 0
+        for ticket in tickets:
+            count = count + ticket.quantity
+
+        percentage = (count / venue.capacity) * 100
+        price = show.ticket_price + show.ticket_price * percentage
+        show.ticket_price = price
+        db.session.commit()
+
+        return render_template(
+            "bookTicket.html", show=show, user=current_user, price=price
+        )
 
 
 @ticket.route("/book", methods=["POST"])
 @login_required
 def bookTicket():
     venue = Venue.query.filter(Venue.show.any(id=request.form.get("show_id"))).first()
-    tickets = Ticket.query.filter_by(show=request.form.get("show_id")).count()
-    if tickets > venue.capacity:
+    tickets = Ticket.query.filter_by(show=request.form.get("show_id"))
+    count = 0
+    for ticket in tickets:
+        count = count + ticket.quantity
+    print("Tickets count: ", tickets)
+    print("Venue capacity: ", venue.capacity)
+    print(count > venue.capacity)
+    if count > venue.capacity:
         flash("Venue Full. Sorry!", category="error")
-        return redirect(url_for("website.home"))
+        return redirect(url_for("views.home"))
 
     ticket = Ticket(
         show=request.form.get("show_id"),
         date=datetime.strptime(request.form.get("date"), "%Y-%m-%d"),
         user=current_user.id,
+        quantity=request.form.get("quantity"),
     )
     db.session.add(ticket)
     db.session.commit()

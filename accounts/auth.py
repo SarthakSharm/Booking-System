@@ -16,6 +16,9 @@ def login():
 
         user = User.query.filter_by(email=email).first()
         if user:
+            if user.is_admin == True:
+                flash("Login using admin login!", category="warning")
+                return redirect(url_for("auth.adminLogin"))
             if check_password_hash(user.password, password):
                 flash("Logged in successfully!", category="success")
                 login_user(user, remember=True)
@@ -46,9 +49,9 @@ def adminLogin():
             else:
                 flash("Email does not exist.", category="error")
         else:
-            flash("This is only for admin")
+            flash("This is only for admin", category="error")
 
-    return render_template("login.html", user=current_user)
+    return render_template("login.html", user=current_user, admin=True)
 
 
 @auth.route("/logout")
