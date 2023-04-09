@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %}
+{% block content %}
+<div class="col-4 mt-4">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <form action="/ticket/book" , method="POST">
+                <input type="number" name="show_id" id="show_id" value={{show.id}} hidden>
+                <h5 class="card-title">{{show.name}}</h5>
+                <p class="card-text">Rating : {{show.rating}}</p>
+                <p class="card-text">Tags : {{show.tag}}</p>
+                <p class="card-text">Price : {{show.ticket_price}}</p>
+                <p class="card-text">Date : {{show.date}}</p>
+                <input type="date" name="date" id="date" value={{show.date}} hidden>
+                <button type="submit" class="mt-2 btn btn-primary">Confirm Ticket</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

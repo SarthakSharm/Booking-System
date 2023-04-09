@@ -9,6 +9,7 @@ venue = Blueprint("venue", __name__, url_prefix="/venue")
 
 
 @venue.route("/", methods=["GET"])
+@login_required
 def venues():
     if request.method == "GET":
         venues = Venue.query.all()
@@ -26,6 +27,6 @@ def create():
         )
         db.session.add(venue)
         db.session.commit()
-        return redirect(url_for('venue.venues'))
+        return redirect(url_for("venue.venues"))
     if request.method == "GET":
         return render_template("createVenue.html", user=current_user)

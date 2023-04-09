@@ -27,6 +27,7 @@ def login():
 
     return render_template("login.html", user=current_user)
 
+
 @auth.route("/admin/login", methods=["GET", "POST"])
 def adminLogin():
     if request.method == "POST":
@@ -44,15 +45,17 @@ def adminLogin():
                     flash("Incorrect password, try again.", category="error")
             else:
                 flash("Email does not exist.", category="error")
-        else: 
-            flash('This is only for admin')
+        else:
+            flash("This is only for admin")
 
     return render_template("login.html", user=current_user)
 
 
 @auth.route("/logout")
+@login_required
 def logout():
-    return "<p>Logout</p>"
+    logout_user()
+    return redirect(url_for("auth.login"))
 
 
 @auth.route("/signup", methods=["GET", "POST"])
