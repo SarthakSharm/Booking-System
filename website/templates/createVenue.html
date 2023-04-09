@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %}
+{% block content %}
+<form method="POST">
+    <h3 align="center">Add Venue</h3>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" />
+    </div>
+    <div class="form-group">
+        <label for="place">Place</label>
+        <input type="place" class="form-control" id="place" name="place" placeholder="Enter place" />
+    </div>
+    <div class="form-group">
+        <label for="capacity">Capacity</label>
+        <input type="number" class="form-control" id="capacity" name="capacity" placeholder="capacity" />
+    </div>
+    <div class="form-group">
+        <label for="screens">Screens</label>
+        <input type="number" class="form-control" id="screens" name="screens" placeholder="Enter screens" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
