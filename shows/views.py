@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template
+from flask import Blueprint, request, render_template, redirect, url_for
 from .models import Show
 from datetime import datetime
 from flask_login import login_user, login_required, logout_user, current_user
@@ -28,7 +28,7 @@ def create():
         )
         db.session.add(show)
         db.session.commit()
-        return render_template("show.html", user=current_user)
+        return redirect(url_for("show.shows"))
     if request.method == "GET":
         venues = Venue.query.all()
         return render_template("createShow.html", user=current_user, venues=venues)
