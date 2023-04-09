@@ -8,6 +8,7 @@ class Show(db.Model):
     rating = db.Column(db.Integer, nullable=True)
     tag = db.Column(db.String, nullable=True)
     ticket_price = db.Column(db.Integer, nullable=False)
+    updated_price = db.Column(db.Integer, nullable=True)
     venue_id = db.Column(
         db.Integer, db.ForeignKey("venue.id", ondelete="CASCADE"), nullable=False
     )

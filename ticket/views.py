@@ -23,25 +23,14 @@ def myTickets():
 def confirmTicket(show_id):
     if request.method == "GET":
         show = Show.query.filter_by(id=show_id).first()
-        venue = Venue.query.filter(Venue.show.any(id=show_id)).first()
-        tickets = Ticket.query.filter_by(show=request.form.get("show_id"))
-        count = 0
-        for ticket in tickets:
-            count = count + ticket.quantity
 
-        percentage = (count / venue.capacity) * 100
-        price = show.ticket_price + show.ticket_price * percentage
-        show.ticket_price = price
-        db.session.commit()
-
-        return render_template(
-            "bookTicket.html", show=show, user=current_user, price=price
-        )
+        return render_template("bookTicket.html", show=show, user=current_user)
 
 
 @ticket.route("/book", methods=["POST"])
 @login_required
 def bookTicket():
+    show = Show.query.filter_by(id=request.form.get("show_id")).first()
     venue = Venue.query.filter(Venue.show.any(id=request.form.get("show_id"))).first()
     tickets = Ticket.query.filter_by(show=request.form.get("show_id"))
     count = 0
@@ -62,4 +51,13 @@ def bookTicket():
     )
     db.session.add(ticket)
     db.session.commit()
+
+    percentage = count / venue.capacity
+    print(percentage)
+    print(count)
+    price = show.ticket_price + show.ticket_price * percentage
+    print("Updated price: ", price)
+    show.ticket_price = price
+    db.session.commit()
+
     return redirect(url_for("ticket.myTickets"))
